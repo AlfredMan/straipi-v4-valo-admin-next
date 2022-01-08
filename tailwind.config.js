@@ -1,10 +1,95 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
+function withOpacity(variableName) {
+  return ({ opacityValue }) => {
+    if (opacityValue !== undefined) {
+      return `rgba(var(${variableName}), ${opacityValue})`;
+    }
+    return `rgb(var(${variableName}))`;
+  };
+}
+
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  // fontFamily: {
+  //   sans: [
+  //     'ui-sans-serif',
+  //     'system-ui',
+  //     '-apple-system',
+  //     'BlinkMacSystemFont',
+  //     'Segoe UI',
+  //     'Roboto',
+  //     'Helvetica Neue',
+  //     'Arial',
+  //     'Noto Sans',
+  //     'sans - serif',
+  //     'Apple Color Emoji',
+  //     'Segoe UI Emoji',
+  //     'Segoe UI Symbol',
+  //     'Noto Color Emoji',
+  //   ],
+  //   serif: [
+  //     'ui-serif',
+  //     'Georgia, Cambria',
+  //     'Times New Roman',
+  //     'Times',
+  //     'serif',
+  //   ],
+  //   mono: [
+  //     'ui-monospace',
+  //     'SFMono-Regular',
+  //     'Menlo',
+  //     'Monaco',
+  //     'Consolas',
+  //     'Liberation Mono',
+  //     'Courier New',
+  //     'monospace',
+  //   ],
+  //   // 'display': ['Oswald', ...],
+  //   // 'body': ['"Open Sans"', ...],
+  // },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        primary: ["Inter", ...fontFamily.sans],
+      },
+      colors: {
+        primary: {
+          // Customize it on globals.css :root
+          50: withOpacity("--tw-clr-primary-50"),
+          100: withOpacity("--tw-clr-primary-100"),
+          200: withOpacity("--tw-clr-primary-200"),
+          300: withOpacity("--tw-clr-primary-300"),
+          400: withOpacity("--tw-clr-primary-400"),
+          500: withOpacity("--tw-clr-primary-500"),
+          600: withOpacity("--tw-clr-primary-600"),
+          700: withOpacity("--tw-clr-primary-700"),
+          800: withOpacity("--tw-clr-primary-800"),
+          900: withOpacity("--tw-clr-primary-900"),
+        },
+        dark: "#222222",
+      },
+      maxHeight: {
+        192: "48rem",
+      },
+      keyframes: {
+        flicker: {
+          "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": {
+            opacity: 0.99,
+            filter:
+              "drop-shadow(0 0 1px rgba(252, 211, 77)) drop-shadow(0 0 15px rgba(245, 158, 11)) drop-shadow(0 0 1px rgba(252, 211, 77))",
+          },
+          "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": {
+            opacity: 0.4,
+            filter: "none",
+          },
+        },
+      },
+      animation: {
+        flicker: "flicker 3s linear infinite",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
