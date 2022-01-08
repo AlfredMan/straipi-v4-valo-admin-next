@@ -27,7 +27,6 @@ let authInterceptorID: number;
 export const authenticateAPI = (token: string) => {
   authInterceptorID = api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-      debugger;
       if (!config?.headers) {
         config.headers = {};
       }
