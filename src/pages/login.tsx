@@ -1,7 +1,7 @@
 import Layout from "../components/layout/Layout";
 import { LoginForm } from "../components/LoginForm";
 
-export const LoginPage = () => {
+export const Login = () => {
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
@@ -15,4 +15,4 @@ export const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

@@ -39,6 +39,22 @@ export const AuthProvider = ({
   const router = useRouter();
   const isAuthenticated = !!user;
 
+  // const logout = useCallback(
+  //   ({ redirectLocation = "/login" }: { redirectLocation?: string }) => {
+  //     // Cookies.remove('token');
+  //     // setUser(null);
+  //     // delete api.defaults.headers.common.Authorization;
+  //     // window.location.pathname = '/login';
+
+  //     Cookies.remove("token");
+  //     unauthenticateAPI();
+  //     setUser(null);
+  //     setIsLoading(false);
+  //     console.log("Redirecting");
+  //     router.push(redirectLocation || "/login");
+  //   },
+  //   [router]
+  // );
   const logout = useCallback(
     ({ redirectLocation = "/login" }: { redirectLocation?: string }) => {
       // Cookies.remove('token');
@@ -47,11 +63,14 @@ export const AuthProvider = ({
       // window.location.pathname = '/login';
 
       Cookies.remove("token");
+      console.log("logout: -> unauthenticateApi");
       unauthenticateAPI();
       setUser(null);
       setIsLoading(false);
       console.log("Redirecting");
-      router.push(redirectLocation || "/login");
+      if (router.pathname !== (redirectLocation || "/login")) {
+        router.push(redirectLocation || "/login");
+      }
     },
     [router]
   );
@@ -73,17 +92,23 @@ export const AuthProvider = ({
 
     // If we don't have a token in the cookies, logout
     const token = Cookies.get("token");
-    if (!token) {
-      // return logout({ redirectLocation: Component.redirectUnauthenticatedTo });
-      return logout({ redirectLocation: "/login" });
+    console.log("token from Cookies", token);
+    if (router.pathname !== "/login") {
+      if (!token) {
+        // return logout({ redirectLocation: Component.redirectUnauthenticatedTo });
+        console.log("no cookie token, logout");
+        return logout({ redirectLocation: "/login" });
+      }
     }
 
     // If we're not loading give the try to authenticate with the given token.
     if (!isLoading) {
-      authenticate(token);
+      if (!!token) {
+        authenticate(token);
+      }
     }
     // }, [isLoading, isAuthenticated, children.type.requiresAuth]);
-  }, [isLoading, isAuthenticated, logout]);
+  }, [isLoading, isAuthenticated, user, logout, router.pathname]);
 
   const authenticate = async (token: string) => {
     setIsLoading(true);
@@ -94,6 +119,7 @@ export const AuthProvider = ({
       setUser(user);
       Cookies.set("token", token);
     } catch (error) {
+      console.error("fail fetching users/me");
       console.log({ error });
       unauthenticateAPI();
       setUser(null);

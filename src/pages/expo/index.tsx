@@ -1,7 +1,8 @@
 import React from "react";
+import ExpoForm from "../../components/enquiry/ExpoForm";
 
-function index() {
-  return <div>Expo</div>;
+function Expo() {
+  return <ExpoForm></ExpoForm>;
 }
 
-export default index;
+export default Expo;

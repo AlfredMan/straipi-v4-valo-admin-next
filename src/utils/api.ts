@@ -27,9 +27,11 @@ let authInterceptorID: number;
 export const authenticateAPI = (token: string) => {
   authInterceptorID = api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
+      debugger;
       if (!config?.headers) {
         config.headers = {};
       }
+      console.log("*** mounting token to auth interceptor");
       config.headers.authorization = `bearer ${token}`;
       return config;
     }
@@ -37,6 +39,7 @@ export const authenticateAPI = (token: string) => {
 };
 
 export const unauthenticateAPI = () => {
+  console.log("--- ejecting auth interceptor");
   api.interceptors.request.eject(authInterceptorID);
 };
 
