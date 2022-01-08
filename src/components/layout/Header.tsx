@@ -27,13 +27,13 @@ export default function Header() {
     // </header>
     <header className='w-full bg-white'>
       <div className='flex relative justify-center w-full h-16 bg-rose-900'>
-        {/* <Image
+        <Image
           className='object-contain'
           layout='fill'
           objectFit='contain'
           src='https://valobucket.s3.amazonaws.com/uploads/2018/06/Valo-Studio-Logo-V2.png'
           alt='valostudio'
-        /> */}
+        />
       </div>
     </header>
   );

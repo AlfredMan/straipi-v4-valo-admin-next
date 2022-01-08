@@ -5,9 +5,11 @@ import { ExcelExport } from "@progress/kendo-react-excel-export";
 import api from "../../utils/api";
 import {
   Grid,
+  GridCellProps,
   GridColumn,
   GridDataStateChangeEvent,
   GridToolbar,
+  GRID_COL_INDEX_ATTRIBUTE,
 } from "@progress/kendo-react-grid";
 import "@progress/kendo-theme-default/dist/all.css";
 import {
@@ -17,6 +19,7 @@ import {
   State,
   process,
 } from "@progress/kendo-data-query";
+import { useTableKeyboardNavigation } from "@progress/kendo-react-data-tools";
 const parseEnquiries = (enquiries: Array<any>) => {
   if (!enquiries) {
     return [];
@@ -52,6 +55,55 @@ const initialDataState: State = {
   take: 10,
   skip: 0,
 };
+// interface item {
+//   color: string;
+// }
+
+interface CustomCellProps extends GridCellProps {
+  myProp: any; // Array<item>;
+}
+
+// const CustomCell = (props: CustomCellProps) => {
+//   const field = props.field || "";
+//   const value = props.dataItem[field];
+//   const navigationAttributes = useTableKeyboardNavigation(props.id);
+//   return (
+//     <td
+//       style={{ color: value ? props.myProp[0].color : props.myProp[1].color }}
+//       colSpan={props.colSpan}
+//       role={"gridcell"}
+//       aria-colindex={props.ariaColumnIndex}
+//       aria-selected={props.isSelected}
+//       {...{ [GRID_COL_INDEX_ATTRIBUTE]: props.columnIndex }}
+//       {...navigationAttributes}
+//     >
+//       {value === null ? "" : props.dataItem[field].toString()}
+//     </td>
+//   );
+// };
+const CustomDateCell = (props: CustomCellProps) => {
+  const field = props.field || "";
+  const value = props.dataItem[field];
+  const navigationAttributes = useTableKeyboardNavigation(props.id);
+  return (
+    <td
+      // style={{ color: value ? props.myProp[0].color : props.myProp[1].color }}
+      colSpan={props.colSpan}
+      role={"gridcell"}
+      aria-colindex={props.ariaColumnIndex}
+      aria-selected={props.isSelected}
+      {...{ [GRID_COL_INDEX_ATTRIBUTE]: props.columnIndex }}
+      {...navigationAttributes}
+    >
+      {moment(value).format('YYYY-MM-DD')}
+    </td>
+  );
+};
+// const customData: Array<any> = [{ color: "green" }, { color: "red" }];
+const customData = {} as any;
+const customDateCell = (props: GridCellProps) => (
+  <CustomDateCell {...props} myProp={customData} />
+);
 
 export const Enquiries = () => {
   const _export = React.useRef<ExcelExport | null>(null);
@@ -77,6 +129,7 @@ export const Enquiries = () => {
       setIsLoadingEnquiries(false);
     })();
   }, []);
+  const CustomDateCell = (props: GridCellProps) => <div></div>;
 
   return (
     <div className="h-full relative w-full">
@@ -110,7 +163,12 @@ export const Enquiries = () => {
           <GridColumn field="email1" title="Email1" />
           <GridColumn field="interestedPackage" title="Package" />
           <GridColumn field="service_0" title="Service 1" />
-          <GridColumn field="service_0_date" title="Service 1 Date" />
+          <GridColumn
+            field="service_0_date"
+            title="Service 1 Date"
+            format="{0:yyyy-MM-dd}"
+            cell={customDateCell}
+          />
           <GridColumn field="service_0_venues" title="Service 1 Venues" />
           <GridColumn field="note" title="Note" />
           <GridColumn field="submittedBy" title="Submitted by" />
