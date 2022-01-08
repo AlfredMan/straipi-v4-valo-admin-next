@@ -95,7 +95,7 @@ const CustomDateCell = (props: CustomCellProps) => {
       {...{ [GRID_COL_INDEX_ATTRIBUTE]: props.columnIndex }}
       {...navigationAttributes}
     >
-      {moment(value).format('YYYY-MM-DD')}
+      {moment(value).format("YYYY-MM-DD")}
     </td>
   );
 };
@@ -129,7 +129,6 @@ export const Enquiries = () => {
       setIsLoadingEnquiries(false);
     })();
   }, []);
-  const CustomDateCell = (props: GridCellProps) => <div></div>;
 
   return (
     <div className="h-full relative w-full">
@@ -138,6 +137,8 @@ export const Enquiries = () => {
           // pageable={true}
           sortable={true}
           filterable={true}
+          // reorderable={true}
+          resizable={true}
           style={{ height: "100%" }}
           data={process(rowData, dataState)}
           {...dataState}
@@ -157,21 +158,24 @@ export const Enquiries = () => {
             </div>
           </GridToolbar>
           <GridColumn field="id" title="id" width="40px" />
-          <GridColumn field="heardAboutUsFrom" title="From" width="250px" />
-          <GridColumn field="name1" title="Name1" />
-          <GridColumn field="name2" title="Name2" />
-          <GridColumn field="email1" title="Email1" />
-          <GridColumn field="interestedPackage" title="Package" />
-          <GridColumn field="service_0" title="Service 1" />
+          {/* <GridColumn width="50" field="heardAboutUsFrom" title="From" width="250px" /> */}
+          <GridColumn  field="name1" title="Name1" />
+          <GridColumn  field="name2" title="Name2" />
+          <GridColumn width={150} field="email1" title="Email1" />
+          <GridColumn
+            field="interestedPackage"
+            title="Package"
+          />
+          {/* <GridColumn field="service_0" title="Service 1" /> */}
           <GridColumn
             field="service_0_date"
             title="Service 1 Date"
             format="{0:yyyy-MM-dd}"
             cell={customDateCell}
           />
-          <GridColumn field="service_0_venues" title="Service 1 Venues" />
+          <GridColumn  field="service_0_venues" title="Service 1 Venues" />
           <GridColumn field="note" title="Note" />
-          <GridColumn field="submittedBy" title="Submitted by" />
+          {/* <GridColumn field="submittedBy" title="Submitted by" /> */}
         </Grid>
       </ExcelExport>
     </div>
