@@ -3,10 +3,10 @@
 import Axios, { AxiosRequestConfig } from "axios";
 
 const urls = {
-  // test: `http://localhost:1337`,
-  // development: 'http://localhost:1337/',
-  test: `https://valo-strapi.herokuapp.com/`,
-  development: "https://valo-strapi.herokuapp.com/",
+  test: `http://localhost:1337`,
+  development: 'http://localhost:1337/',
+  // test: `https://valo-strapi.herokuapp.com/`,
+  // development: "https://valo-strapi.herokuapp.com/",
   production: "https://valo-strapi.herokuapp.com/",
 };
 const api = Axios.create({
