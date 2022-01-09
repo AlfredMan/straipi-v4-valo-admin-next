@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import * as React from 'react';
+import Image from "next/image";
+import * as React from "react";
 // const links = [
 //   { href: '/', label: 'Route 1' },
 //   { href: '/', label: 'Route 2' },
@@ -25,14 +25,15 @@ export default function Header() {
     //     </nav>
     //   </div>
     // </header>
-    <header className='w-full bg-white'>
-      <div className='flex relative justify-center w-full h-16 bg-rose-900'>
+    <header className="w-full bg-white">
+      <div className="flex relative justify-center w-full h-16 bg-rose-900">
         <Image
-          className='object-contain'
-          layout='fill'
-          objectFit='contain'
-          src='https://valobucket.s3.amazonaws.com/uploads/2018/06/Valo-Studio-Logo-V2.png'
-          alt='valostudio'
+          className="object-contain"
+          layout="fill"
+          objectFit="contain"
+          src="/images/Valo-Studio-Logo-V2.png"
+          // src='https://valobucket.s3.amazonaws.com/uploads/2018/06/Valo-Studio-Logo-V2.png'
+          alt="valostudio"
         />
       </div>
     </header>
