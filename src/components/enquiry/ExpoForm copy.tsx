@@ -164,13 +164,7 @@ const INITIAL_ENQUIRY_VALUE = {
 //   />
 // );
 
-export const ExpoForm = ({
-  availablePackages,
-  availableServices,
-}: {
-  availablePackages: Array<any>;
-  availableServices: Array<any>;
-}) =>
+export const ExpoForm = () =>
   //   {
   //   availablePackages,
   //   availableServices,
@@ -179,19 +173,15 @@ export const ExpoForm = ({
   //   availableServices: Array<any>;
   // }
   {
-    const { user, token } = useAuth();
-    console.log(user, token);
+    const { user,token } = useAuth();
+    console.log(user,token);
     const router = useRouter();
     const formRef = useRef(null);
     const [isLoadingAvailablePackages, setIsLoadingAvailablePackage] =
       useState(true);
-    const [availablePackageOptions, setAvailablePackageOptions] = useState(
-      [] as Array<any>
-    );
-    // const [availableServices, setAvailableServices] = useState([]);
-    const [availableServiceOptions, setAvailableServiceOptions] = useState(
-      [] as Array<any>
-    );
+    const [availablePackageOptions, setAvailablePackageOptions] = useState([]);
+    const [availableServices, setAvailableServices] = useState([]);
+    const [availableServiceOptions, setAvailableServiceOptions] = useState([]);
     const [initialData, setInitialData] = useState(null as any | null);
     const [service0EventName, setService0EventName] = useState("");
 
@@ -244,66 +234,65 @@ export const ExpoForm = ({
     // });
 
     useEffect(() => {
-      // (async () => {
-      //   try {
-      //     const { data: availablePackages } = await api.get(
-      //       "available-packages"
-      //     );
-      if (availablePackages) {
-        // const parsedEnquiries = parseEnquiries(enquiries);
-        // if (parsedEnquiries) {
-        setAvailablePackageOptions(
-          availablePackages.map((p: any) => ({
-            value: p.id,
-            label: p.displayTitle,
-          }))
-        );
+      (async () => {
+        try {
+          const { data: availablePackages } = await api.get(
+            "available-packages"
+          );
+          if (availablePackages) {
+            // const parsedEnquiries = parseEnquiries(enquiries);
+            // if (parsedEnquiries) {
+            setAvailablePackageOptions(
+              availablePackages.map((p: any) => ({
+                value: p.id,
+                label: p.displayTitle,
+              }))
+            );
 
-        // }
-        if (availablePackages?.length > 0) {
-          const initialData = {
-            ...INITIAL_ENQUIRY_VALUE,
-            // interestedPackage: availableServices.find(
-            //   (o: any) => o?.title === 'Wedding Photography'
-            // )?.title,
-            interestedPackage: availablePackages[0].displayTitle,
-          };
-          setInitialData(initialData);
+            // }
+            if (availablePackages?.length > 0) {
+              const initialData = {
+                ...INITIAL_ENQUIRY_VALUE,
+                // interestedPackage: availableServices.find(
+                //   (o: any) => o?.title === 'Wedding Photography'
+                // )?.title,
+                interestedPackage: availablePackages[0].displayTitle,
+              };
+              setInitialData(initialData);
+            }
+          }
+        } catch (error) {
+          console.error("connection failed when fetching: available-package");
         }
-      }
-      // } catch (error) {
-      //   console.error("connection failed when fetching: available-package");
-      // }
-      // try {
-      //   const { data: availableServices } = await api.get(
-      //     "available-services"
-      //   );
-      if (availableServices) {
-        // const parsedEnquiries = parseEnquiries(enquiries);
-        // if (parsedEnquiries) {
-        // setAvailableServiceOptions(
-        //   availableServices.map((s: any) => ({
-        //     value: s.id,
-        //     label: s.displayTitle,
-        //   }))
-        // );
-        // setAvailableServices(availableServices);
-        setAvailableServiceOptions(
-          availableServices.map((s: any) => ({
-            value: s.id,
-            label: s.displayTitle,
-          }))
-        );
-        // }
-      }
+        try {
+          const { data: availableServices } = await api.get(
+            "available-services"
+          );
+          if (availableServices) {
+            // const parsedEnquiries = parseEnquiries(enquiries);
+            // if (parsedEnquiries) {
+            // setAvailableServiceOptions(
+            //   availableServices.map((s: any) => ({
+            //     value: s.id,
+            //     label: s.displayTitle,
+            //   }))
+            // );
+            setAvailableServices(availableServices);
+            setAvailableServiceOptions(
+              availableServices.map((s: any) => ({
+                value: s.id,
+                label: s.displayTitle,
+              }))
+            );
+            // }
+          }
 
-      setIsLoadingAvailablePackage(false);
-      // } catch (error) {
-      //   console.error("connection failed when fetching: available-services");
-      // }
-      // })();
-      // }, [token]);
-    }, []);
+          setIsLoadingAvailablePackage(false);
+        } catch (error) {
+          console.error("connection failed when fetching: available-services");
+        }
+      })();
+    }, [token]);
 
     // useEffect(() => {
     //   if (!(formRef?.current as any)?.values) {
@@ -516,12 +505,8 @@ export const ExpoForm = ({
         };
         // debugger;
         console.log(data);
-        const { data: newEnquiry } = await api.post("enquiries", data);
-        if (!newEnquiry?.id) {
-          window.alert("Server error. ^^''' Let's use pen & paper");
-        } else {
-          router.push(`/registrationComplete/${(newEnquiry as any)?.id}`);
-        }
+        const newEnquiry = await api.post("enquiries", data);
+        router.push(`/registrationComplete/${(newEnquiry as any)?.id}`);
       } catch (err) {
         console.error("post failed");
         window.alert("Server error. ^^''' Let's use pen & paper");
@@ -760,3 +745,13 @@ export const ExpoForm = ({
   };
 
 export default ExpoForm;
+
+// export async function getStaticProps() {
+//   const { data: availablePackages } = await api.get('available-packages');
+
+//   const { data: availableServices } = await api.get('available-services');
+//   return {
+//     props: { availablePackages, availableServices },
+//   };
+
+// }
