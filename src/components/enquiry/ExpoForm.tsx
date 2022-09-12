@@ -552,6 +552,8 @@ export const ExpoForm = ({
         {/* <div className='mt-2 text-center text-xl'>Discount Registration 2022</div> */}
         <div className="flex h-full justify-center relative md:pt-24">
           <div className="h-full max-h-192 max-w-sm px-4 py-4 relative w-full">
+            <div className="text-2xl text-black">National Wedding Show</div>
+            <div className="text-xl">Discount Registration</div>
             {/* <div className='text-4xl'>Valo Studio</div> */}
 
             {/* <div className='text-2xl'>Discount Registration 2022</div> */}
