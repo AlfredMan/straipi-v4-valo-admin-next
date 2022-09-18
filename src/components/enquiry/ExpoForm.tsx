@@ -107,7 +107,7 @@ const INITIAL_ENQUIRY_VALUE = {
   note: "",
   interestedPackage: "",
   service0: "",
-  service0Date: "",
+  service0Date: today.getFullYear() === 2022 ? "2023-02-01" : "",
   service0Venues: "",
 
   service1: "",
@@ -674,7 +674,7 @@ export const ExpoForm = ({
                     <div className="flex justify-center mt-6 w-full">
                       <button
                         // className='bg-pink-500 px-4 py-2 rounded-lg'
-                        className="border border-rose-700 font-medium mb-2 mr-2 px-5 py-2.5 rounded-lg text-center text-rose-700 text-sm dark:border-rose-500 dark:focus:ring-rose-900 dark:hover:bg-rose-700 dark:hover:text-white dark:text-rose-500 hover:bg-rose-800 hover:text-white focus:ring-4 focus:ring-rose-300"
+                        className="border border-rose-700 font-medium mb-2 mr-2 w-full py-2.5 rounded-lg text-center text-rose-700 text-sm dark:border-rose-500 dark:focus:ring-rose-900 dark:hover:bg-rose-700 dark:hover:text-white dark:text-rose-500 hover:bg-rose-800 hover:text-white focus:ring-4 focus:ring-rose-300"
                         type="submit"
                         disabled={isSubmitting}
                       >
