@@ -1,0 +1,147 @@
+[
+  {
+    "_id": "f65a9074-3b3f-456c-a832-d98d3c7d7bfe",
+    "colId": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "containerId": "",
+    "name": "enquiries-get",
+    "url": "127.0.0.1:1337/api/enquiries?populate=*",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-10-07T17:48:14.705Z",
+    "modified": "2022-10-07T20:17:00.285Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "populate",
+        "value": "*",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "7fc9dfaf61a9d3da12d93de84f6f4a9da07c7d124cdee6827d8d9722b3b98fe5e877689e525947c2be71ecf2de880f275f5a1c7454360acbef7a27ee4a3f7613f645bc3a63854549bc939c35629e9f645ff856578b17c72f6be37a0dec71038234422c000414c45c1933bf30db56ad0fb839c5c8e8f4221c6f141b191f5f001d"
+    },
+    "tests": []
+  },
+  {
+    "_id": "e28a28bc-4ad3-4a52-a460-3057830bfd2f",
+    "colId": "75b7c8f7-f8fe-448d-a6dd-6a525159ba7c",
+    "containerId": "",
+    "name": "enquiries-get",
+    "url": "https://valo-strapi.herokuapp.com/enquiries?_limit=-1",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-10-07T17:58:12.775Z",
+    "modified": "2022-10-07T18:15:57.677Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [
+      {
+        "name": "_limit",
+        "value": "-1",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY1MTY1NDE2LCJleHAiOjE2Njc3NTc0MTZ9.nnKDdw4DpKoXMZ0OiwvNYTw4PyiqjVca3R84EdwD2D0"
+    },
+    "tests": []
+  },
+  {
+    "_id": "32b20436-b256-42f0-8f75-945e5deb5334",
+    "colId": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "containerId": "",
+    "name": "enquiries-post",
+    "url": "127.0.0.1:1337/api/enquiries",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-10-07T18:55:11.906Z",
+    "modified": "2022-10-08T09:06:05.244Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"data\": {\n    \n      \"name1\": \"Jasmin \",\n      \"name2\": \"Olly \",\n      \"email1\": \"jasminrowden@hotmail.com\",\n      \"email2\": null,\n      \"heardAboutUsFrom\": \"Expo2022\",\n      \"submittedBy\": \"sales1\",\n      \"note\": null,\n      \"status\": \"s1_enquiring\",\n      \"dateNotSure\": false,\n      \"createdAt\": \"2022-10-07T20:15:51.960Z\",\n      \"updatedAt\": \"2022-10-07T20:17:13.205Z\",\n      \"publishedAt\": \"2022-10-07T20:17:13.196Z\",\n      \"interestedPackage\": 1\n\n    \n  },\n  \"meta\": {}\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "7fc9dfaf61a9d3da12d93de84f6f4a9da07c7d124cdee6827d8d9722b3b98fe5e877689e525947c2be71ecf2de880f275f5a1c7454360acbef7a27ee4a3f7613f645bc3a63854549bc939c35629e9f645ff856578b17c72f6be37a0dec71038234422c000414c45c1933bf30db56ad0fb839c5c8e8f4221c6f141b191f5f001d"
+    },
+    "tests": []
+  },
+  {
+    "_id": "9006941e-f9d5-4e42-ad8c-f7180136be04",
+    "colId": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "containerId": "",
+    "name": "available-service",
+    "url": "127.0.0.1:1337/api/available-services",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2022-10-08T08:39:36.874Z",
+    "modified": "2022-10-08T08:44:18.773Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "7fc9dfaf61a9d3da12d93de84f6f4a9da07c7d124cdee6827d8d9722b3b98fe5e877689e525947c2be71ecf2de880f275f5a1c7454360acbef7a27ee4a3f7613f645bc3a63854549bc939c35629e9f645ff856578b17c72f6be37a0dec71038234422c000414c45c1933bf30db56ad0fb839c5c8e8f4221c6f141b191f5f001d"
+    },
+    "tests": []
+  },
+  {
+    "_id": "fce570f6-3e96-43f7-ba8e-4b8a8b322a51",
+    "colId": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "containerId": "",
+    "name": "available-packages",
+    "url": "127.0.0.1:1337/api/available-packages",
+    "method": "GET",
+    "sortNum": 17500,
+    "created": "2022-10-08T08:44:43.443Z",
+    "modified": "2022-10-08T08:44:47.814Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "7fc9dfaf61a9d3da12d93de84f6f4a9da07c7d124cdee6827d8d9722b3b98fe5e877689e525947c2be71ecf2de880f275f5a1c7454360acbef7a27ee4a3f7613f645bc3a63854549bc939c35629e9f645ff856578b17c72f6be37a0dec71038234422c000414c45c1933bf30db56ad0fb839c5c8e8f4221c6f141b191f5f001d"
+    },
+    "tests": []
+  },
+  {
+    "_id": "67f8dd3a-4c58-4d40-8db2-802e8da0850e",
+    "colId": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "containerId": "",
+    "name": "enquiries-available-services",
+    "url": "127.0.0.1:1337/api/available-services",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-10-08T08:46:36.977Z",
+    "modified": "2022-10-08T09:28:38.137Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"data\":   {\n\n\n        \"serviceTitle\": \"Wedding Photography\",\n        \"serviceType\": \"P\",\n        \"maximumHours\": 10,\n        \"description\": null,\n        \"serviceCharge\": 1300,\n        \"displayTitle\": \"Wedding Photography\",\n        \"chargePerAdditionalHour\": 130,\n        \"createdAt\": \"2022-10-07T19:27:04.079Z\",\n        \"updatedAt\": \"2022-10-07T20:02:57.507Z\",\n        \"publishedAt\": \"2022-10-07T20:02:57.504Z\"\n\n    },\n   \n    \"meta\": {}\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "7fc9dfaf61a9d3da12d93de84f6f4a9da07c7d124cdee6827d8d9722b3b98fe5e877689e525947c2be71ecf2de880f275f5a1c7454360acbef7a27ee4a3f7613f645bc3a63854549bc939c35629e9f645ff856578b17c72f6be37a0dec71038234422c000414c45c1933bf30db56ad0fb839c5c8e8f4221c6f141b191f5f001d"
+    },
+    "tests": []
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "11e00e7e-dab7-4199-ba4c-8186e02c5935",
+    "colName": "valo-strapi-localhost",
+    "created": "2022-10-07T17:48:00.743Z",
+    "sortNum": 10000,
+    "folders": []
+  },
+  {
+    "_id": "75b7c8f7-f8fe-448d-a6dd-6a525159ba7c",
+    "colName": "valo-strapi-heroku-2022",
+    "created": "2022-10-07T17:58:00.150Z",
+    "sortNum": 20000,
+    "folders": []
+  }
+]

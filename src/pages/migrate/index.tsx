@@ -20,35 +20,62 @@ import {
   process,
 } from "@progress/kendo-data-query";
 import { useTableKeyboardNavigation } from "@progress/kendo-react-data-tools";
-const parseEnquiries = (enquiries: Array<any>) => {
-  if (!enquiries) {
-    return [];
-  }
-  const parsedData = enquiries.map((e) => {
-    const {
-      services: packageServices,
-      interestedPackage,
-      ...strippedEnquiry
-    } = e;
-    const parsedEnquiry = {
-      ...strippedEnquiry,
-    };
-    // services.forEach((service: any, i: number) => {
-    //   parsedEnquiry[`service_${i}`] = {
-    //     ...service,
-    //     data: new Date(service.date),
-    //   };
-    // });
-    parsedEnquiry.interestedPackage = interestedPackage.title;
-    packageServices.forEach((packageService: any, i: number) => {
-      parsedEnquiry[`service_${i}`] = packageService.service.serviceTitle;
-      parsedEnquiry[`service_${i}_date`] = packageService.date;
-      parsedEnquiry[`service_${i}_venues`] = packageService.venues;
-    });
-    return parsedEnquiry;
-  });
-  return parsedData;
+import { enquiriesV3, EnquiryV3 } from "./enquiries_v3";
+const convertEnquiriesFromV3 = (raw: Array<EnquiryV3>) => {
+  let parsedEnquiries = raw.map((e) => ({
+    // id: e.id,
+    attributes: {
+      ...e,
+      interestedPackage: {
+        id: e.interestedPackage.id,
+        data: {
+          // id: e.interestedPackage.id,
+          attributes: { ...e.interestedPackage },
+        },
+      },
+      services: e.services.map((s) => ({
+        id: s.service.id,
+        // ...s.service,
+        date: s.date,
+        startTime: s.startTime,
+        maximumHour: s.maximumHour,
+        venues: s.venues,
+        note: s.note,
+      })),
+    },
+  }));
+  console.log(parsedEnquiries);
+  return parsedEnquiries;
 };
+// const parseEnquiries = (enquiries: Array<any>) => {
+//   if (!enquiries) {
+//     return [];
+//   }
+//   const parsedData = enquiries.map((e) => {
+//     const {
+//       services: packageServices,
+//       interestedPackage,
+//       ...strippedEnquiry
+//     } = e;
+//     const parsedEnquiry = {
+//       ...strippedEnquiry,
+//     };
+//     // services.forEach((service: any, i: number) => {
+//     //   parsedEnquiry[`service_${i}`] = {
+//     //     ...service,
+//     //     data: new Date(service.date),
+//     //   };
+//     // });
+//     parsedEnquiry.interestedPackage = interestedPackage.title;
+//     packageServices.forEach((packageService: any, i: number) => {
+//       parsedEnquiry[`service_${i}`] = packageService.service.serviceTitle;
+//       parsedEnquiry[`service_${i}_date`] = packageService.date;
+//       parsedEnquiry[`service_${i}_venues`] = packageService.venues;
+//     });
+//     return parsedEnquiry;
+//   });
+//   return parsedData;
+// };
 
 const initialDataState: State = {
   sort: [{ field: "id", dir: "desc" }],
@@ -121,7 +148,7 @@ export const Enquiries = () => {
     (async () => {
       const { data: enquiries } = await api.get("enquiries");
       if (enquiries) {
-        console.log('raw enquiries', enquiries)
+        console.log("raw enquiries", enquiries);
         const parsedEnquiries = parseEnquiries(enquiries);
         if (parsedEnquiries) {
           setRowData(parsedEnquiries);
@@ -160,13 +187,10 @@ export const Enquiries = () => {
           </GridToolbar>
           <GridColumn field="id" title="id" width="40px" />
           {/* <GridColumn width="50" field="heardAboutUsFrom" title="From" width="250px" /> */}
-          <GridColumn  field="name1" title="Name1" />
-          <GridColumn  field="name2" title="Name2" />
+          <GridColumn field="name1" title="Name1" />
+          <GridColumn field="name2" title="Name2" />
           <GridColumn width={150} field="email1" title="Email1" />
-          <GridColumn
-            field="interestedPackage"
-            title="Package"
-          />
+          <GridColumn field="interestedPackage" title="Package" />
           {/* <GridColumn field="service_0" title="Service 1" /> */}
           <GridColumn
             field="service_0_date"
@@ -174,7 +198,7 @@ export const Enquiries = () => {
             format="{0:yyyy-MM-dd}"
             cell={customDateCell}
           />
-          <GridColumn  field="service_0_venues" title="Service 1 Venues" />
+          <GridColumn field="service_0_venues" title="Service 1 Venues" />
           <GridColumn field="note" title="Note" />
           {/* <GridColumn field="submittedBy" title="Submitted by" /> */}
         </Grid>

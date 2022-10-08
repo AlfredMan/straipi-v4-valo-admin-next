@@ -93,7 +93,7 @@ export const Enquiries = () => {
     //   .then((data) => updateData(data));
 
     (async () => {
-      const { data: enquiries } = await api.get('enquiries');
+      const { data: enquiries } = await api.get('enquiries?_limit=-1');
       if (enquiries) {
         const parsedEnquiries = parseEnquiries(enquiries);
         if (parsedEnquiries) {
